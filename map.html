@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Map</title>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTujvwHxlUQq3MoQlAZJ1ps76sQSdCtI0&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
+    <script>
+	  let latitudeDest = 42.280;
+	  let longitudeDest = -83.750
+		
+	  let latitude = -1000;
+	  let longitude = -1000;
+	  
+	  function openDirMap() {
+		if (latitude === -1000 || longitude === -1000){
+		  alert("Please mark where you are located");
+		  return false;
+		}
+		
+		let url = "https://www.google.com/maps/dir/?api=1";
+		let origin = "&origin=" + latitude + "," + longitude;
+		let destination = "&destination=" + latitudeDest + "," + longitudeDest;
+		let travelmode = "&travelmode=transit";
+		let newUrl = new URL(url + origin + destination + travelmode);
+
+		var win = window.open(newUrl, '_blank');
+		win.focus();
+		return true;
+	  }
+	  
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: latitudeDest, lng: longitudeDest };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+		// Create the initial InfoWindow.
+        let infoWindow = new google.maps.InfoWindow({
+          content: "Please mark where you are located!",
+          position: uluru,
+        });
+        infoWindow.open(map);
+        // Configure the click listener.
+        map.addListener("click", (mapsMouseEvent) => {
+          // Close the current InfoWindow.
+          infoWindow.close();
+          // Create a new InfoWindow.
+          infoWindow = new google.maps.InfoWindow({
+            position: mapsMouseEvent.latLng,
+          });
+          infoWindow.setContent(
+            "YOU ARE HERE!"
+          );
+          infoWindow.open(map);
+		  console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2));
+		  latitude = mapsMouseEvent.latLng.toJSON()['lat'];
+		  longitude = mapsMouseEvent.latLng.toJSON()['lng'];
+		  console.log(latitude);
+		  console.log(longitude);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Map</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+	<form name="form">
+		<input 
+			type="submit" 
+			value="Get directions" 
+			onClick="return openDirMap();"
+		/>
+	</form>
+  </body>
+</html>
