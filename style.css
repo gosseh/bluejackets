@@ -1,3 +1,4 @@
+/* Global */
 html {
     font-weight: normal;
 }
@@ -8,6 +9,7 @@ body {
     width: 100%;
 }
 
+/* expanded-image */
 .picture{
     border-style: solid;
     border-color: black;
@@ -18,4 +20,124 @@ body {
 .posted{
     width: 400px;
     height: 400px;
+}
+
+
+/* index */
+
+
+.navbar {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 120px;
+    background-color: #163c61;
+    border-top: 2px solid  black;
+    border-bottom: 2px solid  black;
+    margin-bottom: 50px;
+}
+
+.website-title {
+    position: relative;
+    float: center;
+    left: 100px;
+    font-size: 50px;
+    font-weight: bold;
+
+}
+
+.header-title {
+    position: relative;
+    top: -5px;
+    left: 25px;
+    text-align: left;
+    color: #62abcc;
+    font-size: 40px;
+    font-weight: bold;
+    text-anchor: initial;
+}
+
+.header-description {
+    position: relative;
+    top: 28px;
+    right: 365px;
+    color: white;
+    font-size: 15;
+    font-weight: bold; 
+}
+
+#filter {
+    position: relative;
+    left:250px;
+    color: white;
+}
+
+#weather {
+    position: relative;
+    left: 150px;
+    color: white;
+}
+
+#weather-icon {
+    position: relative;
+    right: 15px;
+    width: 45px;
+}
+
+.post-panel {
+    margin-bottom: 50px;
+}
+
+.post {
+    position: relative;
+    width: 350px;
+    height: 100%;
+    color: white;
+    float: center;
+    left: 500px;
+    margin-bottom: 25px;
+    border: 5px solid black;
+    border-radius: 10px;
+}
+
+.user-header {
+    background-color: #163c61;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.user-header-text {
+    position: relative;
+    left: 5px;
+    text-align: left;
+}
+
+.user-header-capacity {
+    position: relative;
+    right: 5px;
+    float: right;
+}
+
+.user-image {
+    width: 340px;
+}
+
+.user-button-panel {
+    background-color: #163c61;
+}
+
+.user-info-btn {
+    position: relative;
+    left: 1px;
+    width: 167px;
+}
+
+.user-add-btn {
+    position: relative;
+    left: 1px;
+    width: 167px;
+}
+
+.user-time {
+    text-align: center;
 }
