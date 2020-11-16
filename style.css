@@ -1,0 +1,21 @@
+html {
+    font-weight: normal;
+}
+
+body {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.picture{
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    width: 400px;
+}
+
+.posted{
+    width: 400px;
+    height: 400px;
+}
