@@ -1,12 +1,17 @@
 /* Global */
 html {
     font-weight: normal;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     background-color: white;
     height: 100%;
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0px;
 }
 
 /* expanded-image */
@@ -24,8 +29,6 @@ body {
 
 
 /* index */
-
-
 .navbar {
     overflow: hidden;
     position: fixed;
@@ -35,20 +38,13 @@ body {
     border-top: 2px solid  black;
     border-bottom: 2px solid  black;
     margin-bottom: 50px;
-}
-
-.website-title {
-    position: relative;
-    float: center;
-    left: 100px;
-    font-size: 50px;
-    font-weight: bold;
+    z-index: 1;
 
 }
 
 .header-title {
     position: relative;
-    top: -5px;
+    top: 30px;
     left: 25px;
     text-align: left;
     color: #62abcc;
@@ -59,33 +55,54 @@ body {
 
 .header-description {
     position: relative;
-    top: 28px;
-    right: 365px;
+    top: 30px;
+    left: 25px;
     color: white;
     font-size: 15;
     font-weight: bold; 
 }
 
+.content-container {
+    padding-top: 210px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
 #filter {
     position: relative;
-    left:250px;
+    float: right;
+    width: 100px;
+    height: 35px;
+    top: -20px;
+    right: 250px;
     color: white;
+    background-color:  rgb(134, 130, 130);
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 #weather {
     position: relative;
-    left: 150px;
+    float: right;
     color: white;
+    top: -12px;
+    right: 30px;
 }
 
 #weather-icon {
     position: relative;
-    right: 15px;
+    float: right;
+    left: 80px;
+    top: -20px;
     width: 45px;
 }
 
-.post-panel {
-    margin-bottom: 50px;
+.page-title {
+    position: relative;
+    left: 100px;
+    top: -20px;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .post {
@@ -95,8 +112,8 @@ body {
     color: white;
     float: center;
     left: 500px;
-    margin-bottom: 25px;
-    border: 5px solid black;
+    margin-bottom: 40px;
+    border: 3px solid black;
     border-radius: 10px;
 }
 
@@ -119,7 +136,8 @@ body {
 }
 
 .user-image {
-    width: 340px;
+    width: 100%;
+    display: block;
 }
 
 .user-button-panel {
@@ -128,16 +146,29 @@ body {
 
 .user-info-btn {
     position: relative;
-    left: 1px;
-    width: 167px;
+    top: 2px;
+    width: 173px;
+    height: 30px;
+    color: white;
+    background-color:  rgb(134, 130, 130);
+    border: 1px solid white;
+    border-radius: 5px; 
 }
 
 .user-add-btn {
     position: relative;
-    left: 1px;
-    width: 167px;
+    top: 2px;
+    width: 173px;
+    height: 30px;
+    color: white;
+    background-color:  rgb(134, 130, 130);
+    border: 1px solid white;
+    border-radius: 5px; 
 }
 
 .user-time {
+    position: relative;
+    top: 3px;
     text-align: center;
+    height: 22px;
 }
