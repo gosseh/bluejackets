@@ -21,7 +21,7 @@
         <div class="content-container">
             <div class="page-title"> Post</div>
             <figure class="picture">
-                <img class="posted" src='images/palmer.jpg'>
+                <img src="images/baseball.jpeg" alt="user-image" class="user-image">
                 <div class="figure-title">Distance:
                     <span class="figure-value"> 0.2 miles </span>
                 </div>
@@ -33,7 +33,7 @@
                     <span class="figure-value"> Frisbee </span>
                 </div>
                 <div class="figure-title">Posted by:
-                    <span class="figure-value"> Tommy Lee </span>
+                    <span class="figure-value"> ballmaster </span>
                 </div>
                 <div class="figure-title">Comments:
                     <button class="figure-value comments-btn"> comments </button>
@@ -41,4 +41,22 @@
             </figure>
         </div>
     </body>
+    <script>
+        function getWeather() {
+            let temperature;
+            fetch('http://api.openweathermap.org/data/2.5/weather?id=4984247&appid=465c65f665ec2cfd65c8bb9888c3d9ae&units=imperial')
+            .then(response => response.json())
+            .then(data => {
+                temperature = data["main"]["temp"];
+                document.getElementById('weather').textContent = temperature + ' \xB0F';
+                if (temperature <= 45) {
+                    document.getElementById('weather-icon').src = "images/cold.png";
+                }
+                else {
+                    document.getElementById('weather-icon').src = "images/warm.png"
+                }
+            });
+        }
+        getWeather();
+    </script>
 </html>
