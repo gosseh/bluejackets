@@ -67,7 +67,7 @@ body {
     border-top: 2px solid  black;
     border-bottom: 2px solid  black;
     margin-bottom: 50px;
-    z-index: 1;
+    z-index: 2;
 
 }
 
@@ -134,6 +134,40 @@ body {
     font-weight: bold;
 }
 
+.addBtn {
+    position: relative;
+    float: right;
+    width: 100px;
+    height: 35px;
+    top: -75px;
+    color: white;
+    background-color:  rgb(134, 130, 130);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.upload {
+    position: relative;
+    float: right;
+    left: 100px;
+    
+}
+
+#uploadImg {
+    color: white;
+    background-color:  rgb(134, 130, 130);
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#submitBtn {
+    color: white;
+    background-color:  rgb(134, 130, 130);
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
 .post {
     position: relative;
     width: 350px;
@@ -145,6 +179,19 @@ body {
     border: 3px solid black;
     border-radius: 10px;
 }
+
+.allPosts {
+    position: relative;
+    width: 350px;
+    height: 100%;
+    color: white;
+    float: center;
+    left: 500px;
+    margin-bottom: 25px;
+    border: 5px solid black;
+    border-radius: 10px;
+}
+
 
 .user-header {
     background-color: #163c61;
@@ -201,3 +248,4 @@ body {
     text-align: center;
     height: 22px;
 }
+

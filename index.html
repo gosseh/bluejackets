@@ -5,6 +5,10 @@
         <link rel="stylesheet" href="style.css">
         <title> Bluejackets Team Finder</title>
     </head>
+
+    <script src='code/scripts/jquery.min.js'></script>
+    <script src='code/scripts/main.js'></script>
+
     <body>
         <div class="navbar">
             <div class="header-title"> Bluejackets</div>
@@ -21,7 +25,20 @@
 
         <div class="content-container">
             <div class="page-title"> User Posts </div>
-            <div class="post"> 
+            <button class="addBtn"> New Post </button>
+            <div class="upload">
+                <tr>
+                    <td valign="top">
+                        <input accept=".jpg,.png" type="file" id="uploadImg" name="icon">
+                    </td>
+                </tr>
+        
+                <tr>
+                    <button id="submitBtn" type="submit">Upload Image</button>
+                </tr>
+            </div>
+                    
+            <!--<div class="post"> 
                 <div class="user-header">
                     <span class="user-header-text">Tommy123 - Frisbee</span>
                     <span class ="user-header-capacity"> CAP: 0/3</span>
@@ -79,9 +96,63 @@
                     <button class="btn btn-secondary user-add-btn"> Add </button>
                     <div class="user-time"> 6:10 PM </div>
                 </div>
+            </div>-->
+
+            <div class="allPosts">
+                <div class="post-0"> 
+                    <div class="user-header">
+                        <span class="user-header-text">Tommy123 - Frisbee</span>
+                        <span class ="user-header-capacity"> CAP: 0/0</span>
+                    </div>
+                    <img src="images/frisbee.jpg" alt="user-image" class="user-image">
+                    <div class="user-button-panel">
+                        <button class="btn btn-secondary user-info-btn"> More Info </button>
+                        <button class="btn btn-secondary user-add-btn"> Add </button>
+                        <div class="user-time"> 5:40 PM </div>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Expanded image -->
+            <figure class="expanded-image">
+             <h1 class="more-info">More Information</h1>
+                <button class="backBtn">Back</button>
+                <br>
+                <img class="posted" src='images/frisbee.jpg'>
+                <figcaption>0.2 miles away</figcaption>
+                <figcaption>Palmer field
+                    <button>map</button>
+                </figcaption>
+                <figcaption>Frisbee</figcaption>
+                <figcaption>Posted by: Tommy Lee
+                    <button>comments</button>
+                </figcaption>
+        </figure>
+
         </div>
     </body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyD1sxBkXEe4vtFoUEW82XmJZveU-72L9kA",
+        authDomain: "eecs-493-bluejackets.firebaseapp.com",
+        databaseURL: "https://eecs-493-bluejackets.firebaseio.com",
+        projectId: "eecs-493-bluejackets",
+        storageBucket: "eecs-493-bluejackets.appspot.com",
+        messagingSenderId: "240250766842",
+        appId: "1:240250766842:web:f81d88dcb31ac6dd4b5043"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
     <script>
         function getWeather() {
             let temperature;
