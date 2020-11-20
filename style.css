@@ -187,7 +187,7 @@ body {
     color: white;
     float: center;
     left: 500px;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
     border: 5px solid black;
     border-radius: 10px;
 }
@@ -246,6 +246,5 @@ body {
     position: relative;
     top: 3px;
     text-align: center;
-    height: 22px;
 }
 

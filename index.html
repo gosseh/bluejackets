@@ -29,7 +29,7 @@
             <div class="upload">
                 <tr>
                     <td valign="top">
-                        <input accept=".jpg,.png" type="file" id="uploadImg" name="icon">
+                        <input accept=".jpg,.png,.jpeg" type="file" id="uploadImg" name="icon">
                     </td>
                 </tr>
         
@@ -130,29 +130,29 @@
         </figure>
 
         </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+
+        <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyD1sxBkXEe4vtFoUEW82XmJZveU-72L9kA",
+            authDomain: "eecs-493-bluejackets.firebaseapp.com",
+            databaseURL: "https://eecs-493-bluejackets.firebaseio.com",
+            projectId: "eecs-493-bluejackets",
+            storageBucket: "eecs-493-bluejackets.appspot.com",
+            messagingSenderId: "240250766842",
+            appId: "1:240250766842:web:f81d88dcb31ac6dd4b5043"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        </script>
     </body>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-
-    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
-
-    <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyD1sxBkXEe4vtFoUEW82XmJZveU-72L9kA",
-        authDomain: "eecs-493-bluejackets.firebaseapp.com",
-        databaseURL: "https://eecs-493-bluejackets.firebaseio.com",
-        projectId: "eecs-493-bluejackets",
-        storageBucket: "eecs-493-bluejackets.appspot.com",
-        messagingSenderId: "240250766842",
-        appId: "1:240250766842:web:f81d88dcb31ac6dd4b5043"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    </script>
     <script>
         function getWeather() {
             let temperature;
