@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Bluejackets</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/smoothproducts.css">
+</head>
+
+<script src='code/scripts/jquery.min.js'></script>
+<script src='code/scripts/authentication.js'></script>
+
+<body>
+    <!-- Start: Login Form Clean -->
+    <div class="login-clean">
+        <form method="post">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration" style="color: #163c61;"><i class="material-icons" style="color: #163C61;font-size: 90px;">person</i>
+                <p style="font-size: 13px;color: #163C61;">Welcome Back!</p>
+            </div>
+            <div class="form-group"><input id="emailExists" class="form-control" type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@umich.edu$" required=""></div>
+            <div class="form-group"><input id="passwordExists" class="form-control" type="password" name="password" placeholder="Password" required="" minlength="6"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" id="signInButton" type="button" style="background: #163c61;">Sign In</button></div><a class="forgotPassword" href="#">Forgot Password?</a></form>
+    </div>
+    <!-- End: Login Form Clean -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/smoothproducts.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyD1sxBkXEe4vtFoUEW82XmJZveU-72L9kA",
+        authDomain: "eecs-493-bluejackets.firebaseapp.com",
+        databaseURL: "https://eecs-493-bluejackets.firebaseio.com",
+        projectId: "eecs-493-bluejackets",
+        storageBucket: "eecs-493-bluejackets.appspot.com",
+        messagingSenderId: "240250766842",
+        appId: "1:240250766842:web:f81d88dcb31ac6dd4b5043"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var database = firebase.database();
+    </script>
+</body>
+
+</html>
