@@ -2,12 +2,12 @@
 
 // Main
 $(document).ready(function () {
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      window.location.href = './index.html';
-    }
-  });
-  
+  // firebase.auth().onAuthStateChanged(function(user) {
+  //   if (user) {
+  //     window.location.href = './userlocation.html';
+  //   }
+  // });
+
   let nameInput = $("#nameIn");
   let emailInput = $("#emailIn");
   let passwordInput = $("#passwordIn");
@@ -46,7 +46,8 @@ $(document).ready(function () {
               console.log(error);
             } else {
               // Data saved successfully!
-              window.location.href = './index.html';
+              window.location.href = './userlocation.html';
+              
             }
           });
         
@@ -76,7 +77,7 @@ $(document).ready(function () {
     let password = passwordIn.val();
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
-      window.location.href = './index.html';
+      window.location.href = './userlocation.html';
     })
     .catch((error) => {
       alert("Username or Password is Incorrect");

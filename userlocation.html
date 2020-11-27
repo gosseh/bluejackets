@@ -30,9 +30,8 @@
 		// return to homepage
 	  }
 	  
-	  function submitLocation() {
-		localStorage.latitude = latitude;
-		localStorage.longitude = longitude;
+	  function continueFunction() {
+      window.location.href = './index.html';
 	  }
 	  
       // The following example creates a marker in Stockholm, Sweden using a DROP
@@ -45,15 +44,57 @@
           zoom: 13,
           center: { lat: 42.280, lng: -83.750 },
         });
-        marker = new google.maps.Marker({
-          map,
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          position: { lat: latitude, lng: longitude },
-        });
-        marker.addListener("drag", toggleBounce);
-		marker.addListener("dragend", toggleBounce);
+        infoWindow = new google.maps.InfoWindow();
+        const locationButton = document.createElement("button");
+        locationButton.textContent = "Submit Current Location";
+        locationButton.classList.add("custom-map-control-button");
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+        var latitude;
+        var longitude;
+        locationButton.addEventListener("click", () => {
+          // Try HTML5 geolocation.
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+            (position) => {
+            marker = new google.maps.Marker({
+              map,
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+              position: { lat: position.coords.latitude, lng: position.coords.longitude },
+            });
+            marker.addListener("drag", toggleBounce);
+            marker.addListener("dragend", toggleBounce);
+            let uid = firebase.auth().currentUser.uid;
+              
+            const pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            }
+            firebase.database().ref().child('users/' + uid).push(pos)
+            map.setCenter(pos);
+          },
+          () => {
+            handleLocationError(true, infoWindow, map.getCenter());
+          }
+        );
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
       }
+    });
+
+
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(
+      browserHasGeolocation
+        ? "Error: The Geolocation service failed."
+        : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open(map);
+  }
 
       function toggleBounce() {
         if (marker.getAnimation() !== null) {
@@ -83,15 +124,34 @@
       <img src="images/cold.png" alt="weather-icon" id="weather-icon">
     </div>
     <div class="content-container">
-      <h3>Drag pin to your location</h3>
+      <h3>Please submit your location before continuing</h3>
       <div id="map"></div>
-	    <form name="form">
-		  <input 
-			type="submit" 
-			value="Save my location" 
-			onClick="return submitLocation();"
-		/>
-	  </form>
+	    <button onclick="continueFunction()">Continue</button>
     </div>
+
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+          apiKey: "AIzaSyD1sxBkXEe4vtFoUEW82XmJZveU-72L9kA",
+          authDomain: "eecs-493-bluejackets.firebaseapp.com",
+          databaseURL: "https://eecs-493-bluejackets.firebaseio.com",
+          projectId: "eecs-493-bluejackets",
+          storageBucket: "eecs-493-bluejackets.appspot.com",
+          messagingSenderId: "240250766842",
+          appId: "1:240250766842:web:f81d88dcb31ac6dd4b5043"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var database = firebase.database();
+      </script>
   </body>
 </html>
