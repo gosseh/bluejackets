@@ -24,79 +24,19 @@
         </div>
 
         <div class="content-container">
-            <div class="page-title"> User Posts </div>
-            <button class="addBtn"> New Post </button>
-            <div class="upload">
-                <tr>
-                    <td valign="top">
-                        <input accept=".jpg,.png,.jpeg" type="file" id="uploadImg" name="icon">
-                    </td>
-                </tr>
-        
-                <tr>
-                    <button id="submitBtn" type="submit">Upload Image</button>
-                </tr>
+            <div id="content-heading">
+                <div class="page-title"> User Posts </div>
+                <button class="addBtn"> New Post </button>
             </div>
+            <form id="createPost">
+                <button class="cancelBtn"> Cancel </button><br>
+                <label>Sport: </label><input id="sportInput" type="text"><br>
+                <label>How many people do you need? </label><input id="capacityInput" type="text"><br>
+                <label>Where are you located? </label><input id="locationInput" type="text"><br>
+                <input accept=".jpg,.png,.jpeg" type="file" id="uploadImg" name="icon"><br>
+                <button id="submitBtn" type="button">Submit</button><br>
+            </form>
                     
-            <!--<div class="post"> 
-                <div class="user-header">
-                    <span class="user-header-text">Tommy123 - Frisbee</span>
-                    <span class ="user-header-capacity"> CAP: 0/3</span>
-                </div>
-                <img src="images/frisbee.jpg" alt="user-image" class="user-image">
-                <div class="user-button-panel">
-                    <a href="expanded-image1.html">
-                        <button class="btn btn-secondary user-info-btn"> More Info </button>
-                    </a>
-                    <button class="btn btn-secondary user-add-btn"> Add </button>
-                    <div class="user-time"> 5:40 PM </div>
-                </div>
-            </div>
-    
-            <div class="post"> 
-                <div class="user-header">
-                    <span class="user-header-text">Tom123 - Basketball</span>
-                    <span class ="user-header-capacity"> CAP: 0/6</span>
-                </div>
-                <img src="images/basketball.jpg" alt="user-image" class="user-image">
-                <div class="user-button-panel">
-                    <a href="expanded-image2.html">
-                        <button class="btn btn-secondary user-info-btn"> More Info </button>
-                    </a>
-                    <button class="btn btn-secondary user-add-btn"> Add </button>
-                    <div class="user-time"> 5:50 PM </div>
-                </div>
-            </div>
-    
-            <div class="post"> 
-                <div class="user-header">
-                    <span class="user-header-text">ballmaster - Baseball</span>
-                    <span class ="user-header-capacity"> CAP: 0/10</span>
-                </div>
-                <img src="images/baseball.jpeg" alt="user-image" class="user-image">
-                <div class="user-button-panel">
-                    <a href="expanded-image3.html">
-                        <button class="btn btn-secondary user-info-btn"> More Info </button>
-                    </a>
-                    <button class="btn btn-secondary user-add-btn"> Add </button>
-                    <div class="user-time"> 6:00 PM </div>
-                </div>
-            </div>
-    
-            <div class="post"> 
-                <div class="user-header">
-                    <span class="user-header-text">realronaldo - Soccer</span>
-                    <span class ="user-header-capacity"> CAP: 0/4</span>
-                </div>
-                <img src="images/soccer.jpg" alt="user-image" class="user-image">
-                <div class="user-button-panel">
-                    <a href="expanded-image4.html">
-                        <button class="btn btn-secondary user-info-btn"> More Info </button>
-                    </a>
-                    <button class="btn btn-secondary user-add-btn"> Add </button>
-                    <div class="user-time"> 6:10 PM </div>
-                </div>
-            </div>-->
 
             <div class="allPosts">
                 <div class="post-0"> 
@@ -113,21 +53,23 @@
                 </div>
             </div>
             
-            <!-- Expanded image -->
-            <figure class="expanded-image">
-             <h1 class="more-info">More Information</h1>
-                <button class="backBtn">Back</button>
-                <br>
-                <img class="posted" src='images/frisbee.jpg'>
-                <figcaption>0.2 miles away</figcaption>
-                <figcaption>Palmer field
-                    <button>map</button>
-                </figcaption>
-                <figcaption>Frisbee</figcaption>
-                <figcaption>Posted by: Tommy Lee
-                    <button>comments</button>
-                </figcaption>
-        </figure>
+
+            <div class="expanded-images">
+                <figure class="expanded-image-0">
+                    <h1 class="more-info">More Information</h1>
+                       <button class="backBtn">Back</button>
+                       <br>
+                       <img class="posted" src='images/frisbee.jpg'>
+                       <figcaption>0.2 miles away</figcaption>
+                       <figcaption>Palmer field
+                           <button>map</button>
+                       </figcaption>
+                       <figcaption>Frisbee</figcaption>
+                       <figcaption>Posted by: Tommy Lee
+                           <button>comments</button>
+                       </figcaption>
+                   </figure>
+            </div>
 
         </div>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -136,7 +78,9 @@
         <!-- TODO: Add SDKs for Firebase products that you want to use
             https://firebase.google.com/docs/web/setup#available-libraries -->
 
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
 
         <script>
         // Your web app's Firebase configuration
