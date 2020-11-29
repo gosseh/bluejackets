@@ -34,9 +34,6 @@ $(document).ready(function () {
     var url = childSnapshot.child("url").val();
     if(url){
       count++;
-      let uid = firebase.auth().currentUser.uid;
-      firebase.database().ref('users/' + uid).update({postNum: count,});
-      var num = childSnapshot.child("postNum").val();
       var time = childSnapshot.child("time").val();
       var email = childSnapshot.child("email").val();
       var uniqname = email.substring(0, email.length - 10);
@@ -46,7 +43,10 @@ $(document).ready(function () {
       var locationName = childSnapshot.child("location").val();
       var people = parseInt(childSnapshot.child("people").val());
       var userID = childSnapshot.child("id").val();
-      console.log(userID);
+      let uid = firebase.auth().currentUser.uid;
+      firebase.database().ref('users/' + userID).update({postNum: count,});
+      var num = childSnapshot.child("postNum").val();
+      console.log(num);
       var post = createPostDiv(url, num, time, uniqname, capacity, sport, people);
       allPosts.append(post);
       infoBtn = $('#user-info' + num);
@@ -99,31 +99,20 @@ $(document).ready(function () {
           snapshot.forEach(function(childSnapshot) { 
             let checkID = childSnapshot.child("id").val();
             if(checkID === userID){
-              console.log("here");
               originLat = parseFloat(childSnapshot.child("lat").val());
               originLon = parseFloat(childSnapshot.child("lng").val());
             }
-            if(checkID === uid)
-            {
-              console.log("here");
+            if(checkID === uid){
               destLat = parseFloat(childSnapshot.child("lat").val());
               destLon = parseFloat(childSnapshot.child("lng").val());
             }
-            console.log(originLat);
-            console.log(originLon);
-            console.log(destLat);
-            console.log(destLon);
-            if(originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000)
-            {
-              console.log("here");
+            if(originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000){
               let url = "https://www.google.com/maps/dir/?api=1";
               let origin = "&origin=" + originLat + "," + originLon;
               let destination = "&destination=" + destLat + "," + destLon;
               let travelmode = "&travelmode=transit";
               let newUrl = new URL(url + origin + destination + travelmode);
-      
-              var win = window.open(newUrl, '_blank');
-              win.focus();
+              window.open(newUrl, '_blank');
             }
           }); 
         });
@@ -260,12 +249,5 @@ function createExpandedDiv(index, location, sport, name, url) {
   return "<div class='expanded" + index + "'><figure class='expanded-image'><h1 class='more-info'>More Information</h1><button class='backBtn' id='backBtn"+index+"'>Back</button><br><img class='posted' src='"+ url + "'><figcaption>"+location+" <button id='mapBtn"+ index +"'>Directions</button></figcaption><figcaption>"+sport+"</figcaption><figcaption>Posted by: "+ name +"</figcaption></figure></div></div>"
 }
 
-// function getNumPeople(id) {
-//   var ref = firebase.database().ref("users/" + id);
-//   ref.child("people").on('value',function(snapshot){
-//     console.log(parseInt(snapshot.val()) + 1)
-//     var numPeople = parseInt(snapshot.val()) + 1;
-    
-//   });
-// }
+
           
