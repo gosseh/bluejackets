@@ -36,10 +36,12 @@ $(document).ready(function () {
       firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
         let name = nameInput.val();
+        let email = emailInput.val();
         let uid = firebase.auth().currentUser.uid;
         console.log(uid);
-          firebase.database().ref('users/' + uid).set({
+          firebase.database().ref('users/' + uid).update({
             username: name,
+            email: email,
           }, (error) => {
             if (error) {
               // The write failed...
