@@ -1,6 +1,42 @@
+body {
+  font-family: "Times New Roman", Times, serif;
+  background-color: #f1f7fc;
+}
+
+/* Navbar Start */
+.navbar {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 120px;
+  background-color: #163c61;
+  border-top: 2px solid  black;
+  border-bottom: 2px solid  black;
+  z-index: 2;
+}
+
+.header-title {
+  position: relative;
+  text-align: left;
+  color: #62abcc;
+  font-size: 40px;
+  font-weight: bold;
+  text-anchor: initial;
+}
+
+.header-description {
+  position: relative;
+  right: 1147px;
+  top: 30px;
+  color: white;
+  font-size: 15;
+  font-weight: bold; 
+}
+/* Navbar End */
+
 .login-clean {
-  background: #f1f7fc;
-  padding: 80px 0;
+  position: relative;
+  top: 150px;
 }
 
 .login-clean form {
