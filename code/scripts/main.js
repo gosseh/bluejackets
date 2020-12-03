@@ -12,6 +12,7 @@ var contentHeader;
 var cancelBtn;
 var addBtn;
 var mapBtn;
+var logout;
 
 ////  Functional Code  ////
 
@@ -22,11 +23,11 @@ $(document).ready(function () {
   create = $("#createPost");
   uploadBtn = $("#submitBtn");
   allPosts = $(".allPosts");
-  contentContainer = $(".content-container");
   contentHeader = $("#content-heading");
   cancelBtn = (".cancelBtn");
   expanded = $(".expanded-images");
-  newPostBtn = $(".addBtn")
+  newPostBtn = $(".addBtn");
+  logout = $(".logoutBtn");
   create.hide();
 
   //load all of the posts
@@ -84,8 +85,14 @@ $(document).ready(function () {
         ref.child("people").once('value',function(snapshot){
           console.log(parseInt(snapshot.val()) + 1)
           var numPeople = parseInt(snapshot.val()) + 1;
-          firebase.database().ref('users/' + userID).update({people: numPeople,});
-          location.reload();
+          if(numPeople > capacity)
+          {
+            alert("This location has reached maximum capacity.");
+          }
+          else{
+            firebase.database().ref('users/' + userID).update({people: numPeople,});
+            location.reload();
+          }
           
         });
       });
@@ -126,6 +133,15 @@ $(document).ready(function () {
     create.show();
     allPosts.hide();
     contentHeader.hide();
+    expanded.hide();
+  });
+
+  $(logout).click(function () {
+    firebase.auth().signOut().then(function() {
+      window.location.href = './register.html';
+    }).catch(function(error) {
+      console.log(error)
+    });
   });
 
   $(cancelBtn).click(function () {
