@@ -99,12 +99,12 @@ $(document).ready(function () {
           snapshot.forEach(function(childSnapshot) { 
             let checkID = childSnapshot.child("id").val();
             if(checkID === userID){
-              originLat = parseFloat(childSnapshot.child("lat").val());
-              originLon = parseFloat(childSnapshot.child("lng").val());
-            }
-            if(checkID === uid){
               destLat = parseFloat(childSnapshot.child("lat").val());
               destLon = parseFloat(childSnapshot.child("lng").val());
+            }
+            if(checkID === uid){
+              originLat = parseFloat(childSnapshot.child("lat").val());
+              originLon = parseFloat(childSnapshot.child("lng").val());
             }
             if(originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000){
               let url = "https://www.google.com/maps/dir/?api=1";
@@ -226,7 +226,7 @@ $(document).ready(function () {
               console.log(error);
             } 
           });
-          //location.reload();
+          location.reload();
         });
       });
 
