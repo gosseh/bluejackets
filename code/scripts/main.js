@@ -29,18 +29,33 @@ $(document).ready(function () {
   newPostBtn = $(".addBtn");
   logout = $(".logoutBtn");
   create.hide();
+  
+  var params={};
+  window.location.search
+  .replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+      params[key] = value;
+    }
+  );
+  
+  console.log(params);
 
   //load all of the posts
   firebase.database().ref("users/").once("value").then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
     var url = childSnapshot.child("url").val();
     if(url){
+	  var sport = childSnapshot.child("sport").val();
+	  console.log(sport);
+	  
+	  if ('filter' in params && sport != params['filter']){
+	    return;
+	  }
       count++;
       var time = childSnapshot.child("time").val();
       var email = childSnapshot.child("email").val();
       var uniqname = email.substring(0, email.length - 10);
       var capacity = childSnapshot.child("capacity").val();
-      var sport = childSnapshot.child("sport").val();
+      
       var name = childSnapshot.child("username").val();
       var locationName = childSnapshot.child("location").val();
       var people = parseInt(childSnapshot.child("people").val());
@@ -160,7 +175,7 @@ $(document).ready(function () {
     let capacityString = capacityIn.val();
     let capacity = parseInt(capacityIn.val());
     let located = locationIn.val();
-  
+	console.log(sport);
     if(sport === "" || capacityString === "" || located === "" || !imageIn)
     {
       alert("Please fill out all the fields of this form");
