@@ -85,7 +85,7 @@ $(document).ready(function () {
           console.log(parseInt(snapshot.val()) + 1)
           var numPeople = parseInt(snapshot.val()) + 1;
           firebase.database().ref('users/' + userID).update({people: numPeople,});
-          location.reload();
+          //location.reload();
           
         });
       });
@@ -152,6 +152,8 @@ $(document).ready(function () {
     else
     {
       var time = new Date();
+      time = time.toString();
+      time = time.substring(4, 24);
       console.log(time);
       var storageRef = firebase.storage().ref(time.toString());
       var url;
@@ -224,7 +226,7 @@ $(document).ready(function () {
               console.log(error);
             } 
           });
-          location.reload();
+          //location.reload();
         });
       });
 
