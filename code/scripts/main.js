@@ -48,7 +48,7 @@ $(document).ready(function () {
       firebase.database().ref('users/' + userID).update({postNum: count,});
       var num = childSnapshot.child("postNum").val();
       var post = createPostDiv(url, num, time, uniqname, capacity, sport, people);
-      contentContainer.append(post);
+      allPosts.append(post);
       infoBtn = $('#user-info' + num);
       addBtn = $('#user-add' + num);
       var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
@@ -85,7 +85,7 @@ $(document).ready(function () {
           console.log(parseInt(snapshot.val()) + 1)
           var numPeople = parseInt(snapshot.val()) + 1;
           firebase.database().ref('users/' + userID).update({people: numPeople,});
-          //location.reload();
+          location.reload();
           
         });
       });
