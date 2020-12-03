@@ -17,6 +17,10 @@
 <script src='code/scripts/authentication.js'></script>
 
 <body>
+    <div class="navbar">
+        <div class="header-title"> Bluejackets</div>
+        <div class="header-description"> Find teammates for physical activities </div>
+    </div>
     <!-- Start: Login Form Clean -->
     <div class="login-clean">
         <form method="post">
@@ -27,9 +31,11 @@
             <div class="form-group"><input id="nameIn" class="form-control" type="text" name="name" placeholder="Name" required=""></div>
             <div class="form-group"><input id="emailIn" class="form-control" type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@umich.edu$" required=""></div>
             <div class="form-group"><input id="passwordIn" class="form-control" type="password" name="password" placeholder="Password" required="" minlength="6"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" id="registerButton" type="button" style="background: #163c61;">Register</button></div><a class="signin" href="#">Already Have An Account?</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" id="registerButton" type="button" style="background: #163c61;">Register</button></div><a class="signin" href="#">Already Have An Account?</a>
+        </form>
     </div>
-    <!-- End: Login Form Clean -->
+<!-- End: Login Form Clean -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>

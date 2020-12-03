@@ -22,6 +22,7 @@ $(document).ready(function () {
   create = $("#createPost");
   uploadBtn = $("#submitBtn");
   allPosts = $(".allPosts");
+  contentContainer = $(".content-container");
   contentHeader = $("#content-heading");
   cancelBtn = (".cancelBtn");
   expanded = $(".expanded-images");
@@ -46,9 +47,8 @@ $(document).ready(function () {
       let uid = firebase.auth().currentUser.uid;
       firebase.database().ref('users/' + userID).update({postNum: count,});
       var num = childSnapshot.child("postNum").val();
-      console.log(num);
       var post = createPostDiv(url, num, time, uniqname, capacity, sport, people);
-      allPosts.append(post);
+      contentContainer.append(post);
       infoBtn = $('#user-info' + num);
       addBtn = $('#user-add' + num);
       var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
@@ -85,7 +85,7 @@ $(document).ready(function () {
           console.log(parseInt(snapshot.val()) + 1)
           var numPeople = parseInt(snapshot.val()) + 1;
           firebase.database().ref('users/' + userID).update({people: numPeople,});
-          location.reload();
+          //location.reload();
           
         });
       });
@@ -99,12 +99,12 @@ $(document).ready(function () {
           snapshot.forEach(function(childSnapshot) { 
             let checkID = childSnapshot.child("id").val();
             if(checkID === userID){
-              originLat = parseFloat(childSnapshot.child("lat").val());
-              originLon = parseFloat(childSnapshot.child("lng").val());
-            }
-            if(checkID === uid){
               destLat = parseFloat(childSnapshot.child("lat").val());
               destLon = parseFloat(childSnapshot.child("lng").val());
+            }
+            if(checkID === uid){
+              originLat = parseFloat(childSnapshot.child("lat").val());
+              originLon = parseFloat(childSnapshot.child("lng").val());
             }
             if(originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000){
               let url = "https://www.google.com/maps/dir/?api=1";
@@ -152,6 +152,8 @@ $(document).ready(function () {
     else
     {
       var time = new Date();
+      time = time.toString();
+      time = time.substring(4, 24);
       console.log(time);
       var storageRef = firebase.storage().ref(time.toString());
       var url;
@@ -242,7 +244,7 @@ $(document).ready(function () {
 });
 
 function createPostDiv(url, index, time, name, capacity, sport, people) {
-  return "<div class='post" + index + "'> <div class='user-header'><span class='user-header-text'>" + name + " - "+ sport + "</span><span class ='user-header-capacity'> CAP: "+people+"/"+capacity+"</span></div><img src='" + url + " alt='user-image' class='user-image'><div class='user-button-panel'><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button><button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button><div class='user-time'>" + time + "</div></div></div>"
+  return "<div class='post post" + index + "'> <div class='user-header'><span class='user-header-text'>" + name + " - "+ sport + "</span><span class ='user-header-capacity'> CAP: "+people+"/"+capacity+"</span></div><img src='" + url + " alt='user-image' class='user-image'><div class='user-button-panel'><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button><button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button><div class='user-time'>" + time + "</div></div></div>"
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
