@@ -159,7 +159,7 @@ $(document).ready(function () {
 
   $(logout).click(function () {
     firebase.auth().signOut().then(function() {
-      window.location.href = './register.html';
+      window.location.href = './login.html';
     }).catch(function(error) {
       console.log(error)
     });
