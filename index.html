@@ -41,41 +41,43 @@
         <!-- <div id="weather"> Weather </div>
         <img src="images/cold.png" alt="weather-icon" id="weather-icon"> -->
     </nav>
+
+        <form id="createPost">
+            <!-- sports selection -->
+            <div class="form-group" >
+                <label for="sportInput">Sport: </label>
+                <select class="form-control" id="sportInput">
+                  <option>Soccer</option>
+                  <option>Kickball</option>
+                  <option>Frisbee</option>
+                  <option>Football</option>
+                  <option>Basketball</option>
+                  <option>Baseball</option>
+                  <option>Tennis</option>
+                </select>
+              </div>
+              <!-- location -->
+              <div class="form-group">
+                <label for="capacityInput">How many people do you need?</label>
+                <textarea class="form-control" id="capacityInput" rows="1"></textarea>
+              </div>
+              <!-- location -->
+              <div class="form-group">
+                <label for="locationInput">Where are you located?</label>
+                <textarea class="form-control" id="locationInput" rows="1"></textarea>
+              </div>
+              <!-- Image -->
+              <div class="form-group">
+                <label for="uploadImg">Submit image of activity</label>
+                <input type="file" class="form-control-file" id="uploadImg" style="background-color: #163c61;">
+              </div>
+              <div class="newPostItem"></div> 
+                <button class="btn btn-secondary" style="background-color: #163c61;" id="submitBtn" type="button">Submit</button>
+                <button class="cancelBtn btn btn-secondary" style="background-color: #163c61;"> Cancel </button>
+              </div> 
+        </form>
     
-    <form id="createPost">
-        <!-- sports selection -->
-        <div class="form-group" >
-            <label for="sportInput">Sport: </label>
-            <select class="form-control" id="sportInput">
-              <option>Soccer</option>
-              <option>Kickball</option>
-              <option>Frisbee</option>
-              <option>Football</option>
-              <option>Basketball</option>
-              <option>Baseball</option>
-              <option>Tennis</option>
-            </select>
-          </div>
-          <!-- location -->
-          <div class="form-group">
-            <label for="capacityInput">How many people do you need?</label>
-            <textarea class="form-control" id="capacityInput" rows="1"></textarea>
-          </div>
-          <!-- location -->
-          <div class="form-group">
-            <label for="locationInput">Where are you located?</label>
-            <textarea class="form-control" id="locationInput" rows="1"></textarea>
-          </div>
-          <!-- Image -->
-          <div class="form-group">
-            <label for="uploadImg">Submit image of activity</label>
-            <input type="file" class="form-control-file" id="uploadImg" style="background-color: #163c61;">
-          </div>
-          <div class="newPostItem"></div> 
-            <button class="btn btn-secondary" style="background-color: #163c61;" id="submitBtn" type="button">Submit</button>
-            <button class="cancelBtn btn btn-secondary" style="background-color: #163c61;"> Cancel </button>
-          </div> 
-    </form>
+    
     
     <div class="expanded-images">
     </div>
