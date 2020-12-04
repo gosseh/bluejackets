@@ -3,6 +3,7 @@
   <head>
     <title>Bluejackets</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTujvwHxlUQq3MoQlAZJ1ps76sQSdCtI0&callback=initMap&libraries=&v=weekly"
@@ -11,9 +12,10 @@
     <style type="text/css">
       /* Set the size of the div element that contains the map */
       #map {
-        height: 400px;
+        height: 500px;
         /* The height is 400 pixels */
-        width: 100%;
+        margin-left: 10%;
+        margin-right: 10%;
         /* The width is the width of the web page */
       }
     </style>
@@ -47,7 +49,10 @@
         infoWindow = new google.maps.InfoWindow();
         const locationButton = document.createElement("button");
         locationButton.textContent = "Show Current Location";
+        locationButton.classList.add("btn");
+        locationButton.classList.add("btn-primary");  
         locationButton.classList.add("custom-map-control-button");
+        locationButton.setAttribute("style", "background-color:#163c61")
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
         var latitude;
         var longitude;
@@ -114,14 +119,13 @@
     </script>
   </head>
   <body>
-    <div class="navbar">
-      <div class="header-title"> Bluejackets</div>
-      <div class="header-description"> Find teammates for physical activities </div>
-    </div>
+    <nav class="navbar navbar-dark" style="background-color: #163c61;">
+      <a class="navbar-brand" id="teamName" href="#">Bluejackets</a>
+    </nav>
     <div class="content-container">
       <h3>Please submit your location before continuing - wait for the red pin to show your location.</h3>
       <div id="map"></div>
-	    <button class="map-submit-location-btn" onclick="continueFunction()">Submit Current Location</button>
+	    <button class="btn btn-primary map-submit-location-btn" style="background-color: #163c61;" onclick="continueFunction()">Submit Current Location</button>
     </div>
 
       

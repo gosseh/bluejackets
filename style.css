@@ -6,7 +6,7 @@ html {
 }
 
 body {
-    background-color: white;
+    background-color: #f1f7fc;
     height: 100%;
     width: 100%;
     max-width: 100%;
@@ -60,13 +60,17 @@ body {
     position: fixed;
     width: 100%;
     height: 120px;
-    background-color: #163c61;
+    /* background-color: #163c61;
     border-top: 2px solid  black;
-    border-bottom: 2px solid  black;
+    border-bottom: 2px solid  black; */
     margin-bottom: 50px;
     z-index: 2;
 }
 
+#teamName{
+    font-size: xx-large;
+    font-weight: bold;
+}
 .header-title {
     position: relative;
     top: 30px;
@@ -89,19 +93,36 @@ body {
 }
 
 .content-container {
-    padding-top: 210px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px;
 }
 
-.filter-dropdown {
+/* .content-container {
+    padding-top: 135px;
+    margin-left: 15px;
+    margin-right: 15px;
+} */
+
+.dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Bottom of button */
+    right: 0;
+    margin-left: -100px; /* More to the left */
+  }
+
+/* .dropdown {
     position: relative;
     float: right;
     top: -15px;
     right: 200px;
-}
+} */
 
-.filter {
+/* .dropdown-toggle {
     width: 100px;
     height: 35px;
     color: white;
@@ -120,20 +141,20 @@ body {
     max-height: 150px;
     border-radius: 10px;
     border: 1px solid black;
-}
+} */
 
-.dropdown-content a {
+/* .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     z-index: 3;
     cursor: pointer;
-}
+} */
 
-.filter-dropdown a:hover {
+/* .filter-dropdown a:hover {
     background-color: #ddd;
-}
+} */
 
 #weather {
     position: relative;
@@ -151,8 +172,8 @@ body {
     width: 45px;
 }
 
-.addBtn {
-    position: relative;
+/* .addBtn {
+    position: fixed;
     float: right;
     width: 100px;
     height: 35px;
@@ -160,14 +181,10 @@ body {
     right: 240px;
     width: 100px;
     height: 35px;
-    color: white;
-    background-color:  rgb(134, 130, 130);
-    border: 1px solid black;
-    border-radius: 10px;
     cursor: pointer;
-}
+} */
 
-.logoutBtn {
+/* .logoutBtn {
     position: relative;
     float: right;
     width: 100px;
@@ -181,7 +198,7 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     cursor: pointer;
-}
+} */
 
 .page-title {
     position: relative;
@@ -219,7 +236,16 @@ body {
     border-radius: 10px;
 }
 
-.post {
+.container-port {
+    width:100%;
+    min-height:400px;
+    margin: 70px auto 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* .post {
     position: relative;
     width: 350px;
     height: 100%;
@@ -229,18 +255,31 @@ body {
     margin-bottom: 40px;
     border: 3px solid black;
     border-radius: 10px;
-}
+} */
 
 .allPosts {
     position: relative;
-    width: 350px;
+    top: 100px;
     height: 100%;
     color: white;
     float: center;
-    left: 500px;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-bottom: 40px;
-    border: 5px solid black;
-    border-radius: 10px;
+}
+
+.expanded-images {
+    position: relative;
+    top: 150px;
+}
+
+#createPost {
+    position: relative;
+    top: 150px;
+}
+
+.card-body {
+    background-color:#163c61;
 }
 
 
@@ -270,7 +309,7 @@ body {
 .user-button-panel {
     background-color: #163c61;
 }
-
+/* 
 .user-info-btn {
     position: relative;
     top: 2px;
@@ -280,9 +319,9 @@ body {
     background-color:  rgb(134, 130, 130);
     border: 1px solid black;
     border-radius: 5px; 
-}
+} */
 
-.user-add-btn {
+/* .user-add-btn {
     position: relative;
     top: 2px;
     width: 173px;
@@ -291,7 +330,7 @@ body {
     background-color:  rgb(134, 130, 130);
     border: 1px solid black;
     border-radius: 5px; 
-}
+} */
 
 .user-time {
     position: relative;
@@ -312,8 +351,9 @@ body {
 }
 
 #createPost {
-    width: 700px;
-    border: 5px solid black;
+    width: 500px;
+    padding: 15px;
+    border: 5px solid #163c61;
     border-radius: 5px;
     margin: auto;
     margin-bottom: 500px;
@@ -334,3 +374,6 @@ body {
     width: 180px;
 }
 
+.aligncenter {
+    text-align: center;
+}

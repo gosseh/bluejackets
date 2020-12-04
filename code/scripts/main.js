@@ -13,23 +13,25 @@ var cancelBtn;
 var addBtn;
 var mapBtn;
 var logout;
+var containerPort;
 
 ////  Functional Code  ////
 
 // Main
 $(document).ready(function () { 
-  post = $('.post')
+  // post = $('.post')
   firstheader = $('.website-title');
   create = $("#createPost");
   uploadBtn = $("#submitBtn");
-  allPosts = $(".allPosts");
+  allPosts = $(".container-port");
   contentHeader = $("#content-heading");
-  cancelBtn = (".cancelBtn");
+  cancelBtn = ("#cancelBtn");
   expanded = $(".expanded-images");
+  containerPort = $(".container-port");
   newPostBtn = $(".addBtn");
   logout = $(".logoutBtn");
   create.hide();
-  
+
   var params={};
   window.location.search
   .replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
@@ -44,18 +46,18 @@ $(document).ready(function () {
     snapshot.forEach(function(childSnapshot) {
     var url = childSnapshot.child("url").val();
     if(url){
-	  var sport = childSnapshot.child("sport").val();
-	  console.log(sport);
-	  
-	  if ('filter' in params && sport != params['filter']){
-	    return;
-	  }
       count++;
+      var sport = childSnapshot.child("sport").val();
+      console.log(sport);
+      
+      if ('filter' in params && sport != params['filter']){
+        return;
+      }
+
       var time = childSnapshot.child("time").val();
       var email = childSnapshot.child("email").val();
       var uniqname = email.substring(0, email.length - 10);
       var capacity = childSnapshot.child("capacity").val();
-      
       var name = childSnapshot.child("username").val();
       var locationName = childSnapshot.child("location").val();
       var people = parseInt(childSnapshot.child("people").val());
@@ -64,7 +66,7 @@ $(document).ready(function () {
       firebase.database().ref('users/' + userID).update({postNum: count,});
       var num = childSnapshot.child("postNum").val();
       var post = createPostDiv(url, num, time, uniqname, capacity, sport, people);
-      allPosts.append(post);
+      containerPort.append(post);
       infoBtn = $('#user-info' + num);
       addBtn = $('#user-add' + num);
       var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
@@ -74,7 +76,7 @@ $(document).ready(function () {
       mapBtn = $("#mapBtn" + num)
       $(infoBtn).click(function () {
         contentHeader.hide();
-        allPosts.hide();
+        containerPort.css("visibility", "collapse");
         firstheader.hide();
         var count2 = 0;
         while(count2 <= count){
@@ -86,14 +88,17 @@ $(document).ready(function () {
           }
           count2++;
         }
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
       $(backBtn).click(function () {
         contentHeader.show();
-        allPosts.show();
+        containerPort.css("visibility", "visible");
         firstheader.show();
         $('.expanded' + num).hide();
       });
+
+
 
       $(addBtn).click(function () { 
         var ref = firebase.database().ref("users/" + userID);
@@ -146,9 +151,10 @@ $(document).ready(function () {
 
   $(newPostBtn).click(function () {
     create.show();
-    allPosts.hide();
+    containerPort.css("visibility", "collapse");
     contentHeader.hide();
     expanded.hide();
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   });
 
   $(logout).click(function () {
@@ -161,7 +167,7 @@ $(document).ready(function () {
 
   $(cancelBtn).click(function () {
     create.hide();
-    allPosts.show();
+    containerPort.css("visibility", "visible");
     contentHeader.show();
   });
 
@@ -175,7 +181,7 @@ $(document).ready(function () {
     let capacityString = capacityIn.val();
     let capacity = parseInt(capacityIn.val());
     let located = locationIn.val();
-	console.log(sport);
+  
     if(sport === "" || capacityString === "" || located === "" || !imageIn)
     {
       alert("Please fill out all the fields of this form");
@@ -275,11 +281,12 @@ $(document).ready(function () {
 });
 
 function createPostDiv(url, index, time, name, capacity, sport, people) {
-  return "<div class='post post" + index + "'> <div class='user-header'><span class='user-header-text'>" + name + " - "+ sport + "</span><span class ='user-header-capacity'> CAP: "+people+"/"+capacity+"</span></div><img src='" + url + " alt='user-image' class='user-image'><div class='user-button-panel'><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button><button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button><div class='user-time'>" + time + "</div></div></div>"
+  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>"+name+" - "+sport+"</h4><p class='card-text'>Capacity: "+people+"/"+capacity+"</p><p class='user-time'>Posted: "+time+"</p><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button></div></div>";
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
-  return "<div class='expanded" + index + "'><figure class='expanded-image'><h1 class='more-info'>More Information</h1><button class='backBtn' id='backBtn"+index+"'>Back</button><br><img class='posted' src='"+ url + "'><figcaption>"+location+" <button id='mapBtn"+ index +"'>Directions</button></figcaption><figcaption>"+sport+"</figcaption><figcaption>Posted by: "+ name +"</figcaption></figure></div></div>"
+  return "<div class='expanded" + index + "'><p><button class='backBtn btn btn-secondary' id='backBtn"+index+"' style='background-color: #163c61;'>&#8592; Back</button></p><figure class='expanded-image' style='text-align: center;'><p class='aligncenter'><img class='img-fluid' src='"+ url + "' alt='Responsive image'><figcaption>Location: "+location+" <button class='backBtn btn btn-secondary' id='mapBtn"+ index +"' style='background-color: #163c61; margin-left: 3px;'>Directions <img src='images/gmapsicon.png' alt='google maps icon' width='25' height='25'></button></figcaption><figcaption style='text-align: center;'>Activity: "+sport+"</figcaption><figcaption style='text-align: center;'>Posted by: "+ name +"</figcaption></figure></p></div></div>"
+  // <i class='material-icons'>directions</i>
 }
 
 
