@@ -39,6 +39,26 @@ $(document).ready(function () {
     }
   );
   
+  function get_distance(lat1, lon1, lat2, lon2) {
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		return dist;
+	}
+  }
+  
   console.log(params);
 
   //load all of the posts
@@ -65,8 +85,44 @@ $(document).ready(function () {
       let uid = firebase.auth().currentUser.uid;
       firebase.database().ref('users/' + userID).update({postNum: count,});
       var num = childSnapshot.child("postNum").val();
-      var post = createPostDiv(url, num, time, uniqname, capacity, sport, people);
-      containerPort.append(post);
+	  var post;
+	  
+	  var distance = "Location not available"
+	  
+      var lat1 = 1000000;
+      var lon1 = 1000000;
+      var lat2 = 1000000;
+      var lon2 = 1000000;
+	  var flag = false;
+        firebase.database().ref("users/").once("value").then(function(snapshot) {
+		  try{
+          snapshot.forEach(function(childSnapshot) { 
+            let checkID = childSnapshot.child("id").val();
+            if(checkID === userID){
+              lat1 = parseFloat(childSnapshot.child("lat").val());
+              lon1 = parseFloat(childSnapshot.child("lng").val());
+            }
+            if(checkID === uid){
+              lat2 = parseFloat(childSnapshot.child("lat").val());
+              lon2 = parseFloat(childSnapshot.child("lng").val());
+            }
+            if(lat1 !== 1000000 && lon1 !== 1000000 && lat2 !== 1000000 && lon2 !== 1000000){
+		      distance = get_distance(lat1, lon1, lat2, lon2).toFixed(2) + " miles away";
+			  post = createPostDiv(url, num, time, uniqname, capacity, sport, people, distance);
+			  containerPort.append(post);
+			  throw "short circuit foreach";
+            }
+          });
+		  } catch (e) {
+			if(e != "short circuit foreach"){
+				throw e;
+			}
+		  }		  
+        });
+	  
+	  
+	  
+      
       infoBtn = $('#user-info' + num);
       addBtn = $('#user-add' + num);
       var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
@@ -280,8 +336,8 @@ $(document).ready(function () {
 
 });
 
-function createPostDiv(url, index, time, name, capacity, sport, people) {
-  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>"+name+" - "+sport+"</h4><p class='card-text'>Capacity: "+people+"/"+capacity+"</p><p class='user-time'>Posted: "+time+"</p><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button></div></div>";
+function createPostDiv(url, index, time, name, capacity, sport, people, distance) {
+  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>"+name+" - "+sport+"</h4><p class='card-text'>Capacity: "+people+"/"+capacity+"</p><p class='user-time'>Posted: "+time+"</p><p class='user-time'>"+distance+"</p><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button></div></div>";
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
