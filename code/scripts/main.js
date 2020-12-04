@@ -329,7 +329,7 @@ $(document).ready(function () {
 });
 
 function createPostDiv(url, index, time, name, capacity, sport, people, distance) {
-  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>" + name + " - " + sport + "</h4><p class='card-text'>Capacity: " + people + "/" + capacity + "</p><p class='user-time'>Posted: " + time + "</p><p class='user-time'>" + distance + "</p><button class='btn btn-secondary user-info-btn' id='user-info" + index + "'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add" + index + "'> Add </button></div></div>";
+  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>"+name+" - "+sport+"</h4><p class='card-text'>Capacity: "+people+"/"+capacity+"</p><p class='user-time'>Posted: "+time+"</p><p class='distance-act'>"+distance+"</p><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button></div></div>";
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
