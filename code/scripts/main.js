@@ -39,26 +39,6 @@ $(document).ready(function () {
     }
     );
 
-  function get_distance(lat1, lon1, lat2, lon2) {
-    if ((lat1 == lat2) && (lon1 == lon2)) {
-      return 0;
-    }
-    else {
-      var radlat1 = Math.PI * lat1 / 180;
-      var radlat2 = Math.PI * lat2 / 180;
-      var theta = lon1 - lon2;
-      var radtheta = Math.PI * theta / 180;
-      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = dist * 180 / Math.PI;
-      dist = dist * 60 * 1.1515;
-      return dist;
-    }
-  }
-
   console.log(params);
 
   //load all of the posts
@@ -94,102 +74,108 @@ $(document).ready(function () {
         var lat2 = 1000000;
         var lon2 = 1000000;
 
-        firebase.database().ref("users/").once("value").then(function (snapshot) {
-          snapshot.forEach(function (childSnapshot) {
-            let checkID = childSnapshot.child("id").val();
-            if (checkID === userID) {
-              lat1 = parseFloat(childSnapshot.child("lat").val());
-              lon1 = parseFloat(childSnapshot.child("lng").val());
-            }
-            if (checkID === uid) {
-              lat2 = parseFloat(childSnapshot.child("lat").val());
-              lon2 = parseFloat(childSnapshot.child("lng").val());
-            }
-            if (lat1 !== 1000000 && lon1 !== 1000000 && lat2 !== 1000000 && lon2 !== 1000000) {
-              distance = get_distance(lat1, lon1, lat2, lon2).toFixed(2) + " miles away";
-              post = createPostDiv(url, num, time, uniqname, capacity, sport, people, distance);
-              containerPort.append(post);
-              infoBtn = $('#user-info' + num);
-              addBtn = $('#user-add' + num);
-              var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
-              expanded.append(expandedPost);
-              $('.expanded' + num).hide();
-              backBtn = $("#backBtn" + num);
-              mapBtn = $("#mapBtn" + num)
-              $(infoBtn).click(function () {
-                contentHeader.hide();
-                containerPort.css("visibility", "collapse");
-                firstheader.hide();
-                var count2 = 0;
-                while (count2 <= count) {
-                  if (count2 !== num) {
-                    $('.expanded' + count2).hide();
-                  }
-                  else {
-                    $('.expanded' + count2).show();
-                  }
-                  count2++;
-                }
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
-              });
-
-              $(backBtn).click(function () {
-                contentHeader.show();
-                containerPort.css("visibility", "visible");
-                firstheader.show();
+        firebase.database().ref("users/" + userID).child("lat").once('value', function (snapshot) {
+          lat1 = snapshot.val();
+          firebase.database().ref("users/" + uid).child("lat").once('value', function (snapshot) {
+            lat2 = snapshot.val();
+            firebase.database().ref("users/" + userID).child("lng").once('value', function (snapshot) {
+              lon1 = snapshot.val();
+              firebase.database().ref("users/" + uid).child("lng").once('value', function (snapshot) {
+                lon2 = snapshot.val();
+                console.log(parseInt(lon1));
+                console.log(parseInt(lon2));
+                console.log(parseInt(lat1));
+                console.log(parseInt(lat2));
+                distance = get_distance(lat1, lon1, lat2, lon2).toFixed(2) + " miles away";
+                post = createPostDiv(url, num, time, uniqname, capacity, sport, people, distance);
+                containerPort.append(post);
+                infoBtn = $('#user-info' + num);
+                addBtn = $('#user-add' + num);
+                var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
+                expanded.append(expandedPost);
                 $('.expanded' + num).hide();
-              });
-
-
-
-              $(addBtn).click(function () {
-                var ref = firebase.database().ref("users/" + userID);
-                ref.child("people").once('value', function (snapshot) {
-                  console.log(parseInt(snapshot.val()) + 1)
-                  var numPeople = parseInt(snapshot.val()) + 1;
-                  if (numPeople > capacity) {
-                    alert("This location has reached maximum capacity.");
+                backBtn = $("#backBtn" + num);
+                mapBtn = $("#mapBtn" + num)
+                $(infoBtn).click(function () {
+                  contentHeader.hide();
+                  containerPort.css("visibility", "collapse");
+                  firstheader.hide();
+                  var count2 = 0;
+                  while (count2 <= count) {
+                    if (count2 !== num) {
+                      $('.expanded' + count2).hide();
+                    }
+                    else {
+                      $('.expanded' + count2).show();
+                    }
+                    count2++;
                   }
-                  else {
-                    firebase.database().ref('users/' + userID).update({ people: numPeople, });
-                    location.reload();
-                  }
-
+                  document.body.scrollTop = document.documentElement.scrollTop = 0;
                 });
-              });
 
-              $(mapBtn).click(function () {
-                var originLat = 1000000;
-                var originLon = 1000000;
-                var destLat = 1000000;
-                var destLon = 1000000;
-                firebase.database().ref("users/").once("value").then(function (snapshot) {
-                  snapshot.forEach(function (childSnapshot) {
-                    let checkID = childSnapshot.child("id").val();
-                    if (checkID === userID) {
-                      destLat = parseFloat(childSnapshot.child("lat").val());
-                      destLon = parseFloat(childSnapshot.child("lng").val());
+                $(backBtn).click(function () {
+                  contentHeader.show();
+                  containerPort.css("visibility", "visible");
+                  firstheader.show();
+                  $('.expanded' + num).hide();
+                });
+
+
+
+                $(addBtn).click(function () {
+                  var ref = firebase.database().ref("users/" + userID);
+                  ref.child("people").once('value', function (snapshot) {
+                    console.log(parseInt(snapshot.val()) + 1)
+                    var numPeople = parseInt(snapshot.val()) + 1;
+                    if (numPeople > capacity) {
+                      alert("This location has reached maximum capacity.");
                     }
-                    if (checkID === uid) {
-                      originLat = parseFloat(childSnapshot.child("lat").val());
-                      originLon = parseFloat(childSnapshot.child("lng").val());
+                    else {
+                      firebase.database().ref('users/' + userID).update({ people: numPeople, });
+                      location.reload();
                     }
-                    if (originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000) {
-                      let url = "https://www.google.com/maps/dir/?api=1";
-                      let origin = "&origin=" + originLat + "," + originLon;
-                      let destination = "&destination=" + destLat + "," + destLon;
-                      let travelmode = "&travelmode=transit";
-                      let newUrl = new URL(url + origin + destination + travelmode);
-                      window.open(newUrl, '_blank');
-                    }
+
                   });
                 });
+
+                $(mapBtn).click(function () {
+                  var originLat = 1000000;
+                  var originLon = 1000000;
+                  var destLat = 1000000;
+                  var destLon = 1000000;
+                  firebase.database().ref("users/").once("value").then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                      let checkID = childSnapshot.child("id").val();
+                      if (checkID === userID) {
+                        destLat = parseFloat(childSnapshot.child("lat").val());
+                        destLon = parseFloat(childSnapshot.child("lng").val());
+                      }
+                      if (checkID === uid) {
+                        originLat = parseFloat(childSnapshot.child("lat").val());
+                        originLon = parseFloat(childSnapshot.child("lng").val());
+                      }
+                      if (originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000) {
+                        let url = "https://www.google.com/maps/dir/?api=1";
+                        let origin = "&origin=" + originLat + "," + originLon;
+                        let destination = "&destination=" + destLat + "," + destLon;
+                        let travelmode = "&travelmode=transit";
+                        let newUrl = new URL(url + origin + destination + travelmode);
+                        window.open(newUrl, '_blank');
+                      }
+                    });
+                  });
+                });
+
               });
-            }
+
+
+            });
+
+
           });
+
+
         });
-
-
 
 
 
@@ -328,8 +314,28 @@ $(document).ready(function () {
 
 });
 
+function get_distance(lat1, lon1, lat2, lon2) {
+  if ((lat1 == lat2) && (lon1 == lon2)) {
+    return 0;
+  }
+  else {
+    var radlat1 = Math.PI * lat1 / 180;
+    var radlat2 = Math.PI * lat2 / 180;
+    var theta = lon1 - lon2;
+    var radtheta = Math.PI * theta / 180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = dist * 180 / Math.PI;
+    dist = dist * 60 * 1.1515;
+    return dist;
+  }
+}
+
 function createPostDiv(url, index, time, name, capacity, sport, people, distance) {
-  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>"+name+" - "+sport+"</h4><p class='card-text'>Capacity: "+people+"/"+capacity+"</p><p class='user-time'>Posted: "+time+"</p><p class='distance-act'>"+distance+"</p><button class='btn btn-secondary user-info-btn' id='user-info"+index+"'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add"+index+"'> Add </button></div></div>";
+  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>" + name + " - " + sport + "</h4><p class='card-text'>Capacity: " + people + "/" + capacity + "</p><p class='user-time'>Posted: " + time + "</p><p class='user-time'>" + distance + "</p><button class='btn btn-secondary user-info-btn' id='user-info" + index + "'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add" + index + "'> Add </button></div></div>";
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
