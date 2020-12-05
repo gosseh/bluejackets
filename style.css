@@ -125,8 +125,8 @@ body {
 }
 
 .img-max {
-    max-width: 38%;
-    max-height: 38%;
+    max-width: 45%;
+    max-height: 45%;
     display: block;
     padding-left: 20px;
     margin-left: auto;
@@ -183,7 +183,7 @@ body {
 
 .allPosts {
     position: relative;
-    top: 100px;
+    top: 50px;
     height: 100%;
     color: white;
     float: center;
