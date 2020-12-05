@@ -340,7 +340,7 @@ function createPostDiv(url, index, time, name, capacity, sport, people, distance
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
-  return "<div class='expanded" + index + "'><button class='btn btn-secondary' id='backBtn" + index + "' style='background-color: #163c61; margin-left: 20px;'>&#8592; Back</button><figure class='expanded-image' style='text-align: center;'><div class='img-max'><img class='rounded mx-auto d-block img-fluid' src='" + url + " alt='Responsive image'></div><figcaption>Location: " + location + " <button class='backBtn btn btn-secondary' id='mapBtn" + index + "' style='background-color: #163c61; margin-left: 3px;'>Directions <img src='images/gmapsicon.png' alt='google maps icon' width='25' height='25'></button></figcaption><figcaption style='text-align: center;'>Activity: " + sport + "</figcaption><figcaption style='text-align: center;'>Posted by: " + name + "</figcaption></figure></p></div></div>"
+  return "<div class='expanded" + index + "'><button class='btn btn-secondary' id='backBtn" + index + "' style='background-color: #163c61; margin-left: 20px;'>&#8592; Back</button><figure class='expanded-image' style='text-align: center;'><div class='img-max'><img class='rounded mx-auto d-block img-fluid' src='" + url + " alt='Responsive image'></div><br><figcaption>Location: " + location + " <button class='backBtn btn btn-secondary' id='mapBtn" + index + "' style='background-color: #163c61; margin-left: 3px;'>Directions <img src='images/gmapsicon.png' alt='google maps icon' width='25' height='25'></button></figcaption><figcaption style='text-align: center;'>Activity: " + sport + "</figcaption><figcaption style='text-align: center;'>Posted by: " + name + "</figcaption></figure></p></div></div>"
 }
 
 

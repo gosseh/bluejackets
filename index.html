@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <script src='code/scripts/jquery.min.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title> Bluejackets Team Finder</title>
@@ -15,78 +17,82 @@
 
 <body>
     <nav class="navbar navbar-dark" style="background-color: #163c61;">
-        <a class="navbar-brand" id="teamName" href="#">Bluejackets</a>
-        <!-- <a class="navbar-brand"> Find teammates for physical activities </a> -->
+        <a class="navbar-brand" id="teamName" href="index.html">Bluejackets</a>
         <div class="btn-group" role="group">
             <button class="btn btn-lg btn-outline-light addBtn" type="button">New Post</button>
-            <button class="btn btn-lg btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Filter
+            <button class="btn btn-lg btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter
             </button>
             <div class="dropdown-container">
                 <div id="filter-dropdown-content" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a href = "index.html">All</a><br>
-                    <a href = "index.html?filter=Soccer">Soccer</a><br>
-                    <a href = "index.html?filter=Kickball">Kickball</a><br>
-                    <a href = "index.html?filter=Frisbee">Frisbee</a><br>
-                    <a href = "index.html?filter=Football">Football</a><br>
-                    <a href = "index.html?filter=Basketball">Basketball</a><br>
-                    <a href = "index.html?filter=Baseball">Baseball</a><br>
-                    <a href = "index.html?filter=Tennis">Tennis</a><br>
-                    <a href = "index.html?filter=Other">Other</a><br>
+                    <a href="index.html">All</a><br>
+                    <a href="index.html?filter=Soccer">Soccer</a><br>
+                    <a href="index.html?filter=Kickball">Kickball</a><br>
+                    <a href="index.html?filter=Frisbee">Frisbee</a><br>
+                    <a href="index.html?filter=Football">Football</a><br>
+                    <a href="index.html?filter=Basketball">Basketball</a><br>
+                    <a href="index.html?filter=Baseball">Baseball</a><br>
+                    <a href="index.html?filter=Tennis">Tennis</a><br>
+                    <a href="index.html?filter=Other">Other</a><br>
                 </div>
             </div>
             <button class="btn btn-lg btn-outline-light logoutBtn" type="button">Log Out</button>
         </div>
-        
+
         <!-- <div id="weather"> Weather </div>
         <img src="images/cold.png" alt="weather-icon" id="weather-icon"> -->
     </nav>
 
-        <form id="createPost">
-            <!-- sports selection -->
-            <div class="form-group" >
-                <label for="sportInput">Sport: </label>
-                <select class="form-control" id="sportInput">
-                  <option>Soccer</option>
-                  <option>Kickball</option>
-                  <option>Frisbee</option>
-                  <option>Football</option>
-                  <option>Basketball</option>
-                  <option>Baseball</option>
-                  <option>Tennis</option>
-                </select>
-              </div>
-              <!-- location -->
-              <div class="form-group">
-                <label for="capacityInput">How many people do you need?</label>
-                <textarea class="form-control" id="capacityInput" rows="1"></textarea>
-              </div>
-              <!-- location -->
-              <div class="form-group">
-                <label for="locationInput">Where are you located?</label>
-                <textarea class="form-control" id="locationInput" rows="1"></textarea>
-              </div>
-              <!-- Image -->
-              <div class="form-group">
-                <label for="uploadImg">Submit image of activity</label>
-                <input type="file" accept=".png,.jpg,.jpeg" class="form-control-file" id="uploadImg" style="background-color: #163c61;">
-              </div>
-              <div class="newPostItem"></div> 
-                <button class="btn btn-secondary" style="background-color: #163c61;" id="submitBtn" type="button">Submit</button>
-                <button class="cancelBtn btn btn-secondary" style="background-color: #163c61;"> Cancel </button>
-              </div> 
-        </form>
-    
-    
-    
+
+
+    <form id="createPost">
+        <!-- sports selection -->
+        <div class="form-group">
+            <label for="sportInput">Sport: </label>
+            <select class="form-control" id="sportInput">
+                <option>Soccer</option>
+                <option>Kickball</option>
+                <option>Frisbee</option>
+                <option>Football</option>
+                <option>Basketball</option>
+                <option>Baseball</option>
+                <option>Tennis</option>
+            </select>
+        </div>
+        <!-- location -->
+        <div class="form-group">
+            <label for="capacityInput">How many people do you need?</label>
+            <textarea class="form-control" id="capacityInput" rows="1"></textarea>
+        </div>
+        <!-- location -->
+        <div class="form-group">
+            <label for="locationInput">Where are you located?</label>
+            <textarea class="form-control" id="locationInput" rows="1"></textarea>
+        </div>
+        <!-- Image -->
+        <div class="form-group">
+            <label for="uploadImg">Submit image of activity</label>
+            <input type="file" accept=".png,.jpg,.jpeg" class="form-control-file" id="uploadImg"
+                style="background-color: #163c61;">
+        </div>
+        <div class="newPostItem"></div>
+        <button class="btn btn-secondary" style="background-color: #163c61;" id="submitBtn"
+            type="button">Submit</button>
+        <button class="cancelBtn btn btn-secondary" style="background-color: #163c61;"> Cancel </button>
+        </div>
+    </form>
+
+
+
     <div class="expanded-images">
     </div>
-    
+
     <div class="allPosts">
-        <div class='d-flex justify-content-center container-port'> 
-        </div>        
+        <div class='d-flex justify-content-center container-port'>
+        </div>
     </div>
-    
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 
