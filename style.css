@@ -60,9 +60,6 @@ body {
     position: fixed;
     width: 100%;
     height: 120px;
-    /* background-color: #163c61;
-    border-top: 2px solid  black;
-    border-bottom: 2px solid  black; */
     margin-bottom: 50px;
     z-index: 2;
 }
@@ -98,11 +95,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* .content-container {
-    padding-top: 135px;
-    margin-left: 15px;
-    margin-right: 15px;
-} */
 
 .dropdown-container {
     position: relative;
@@ -115,46 +107,6 @@ body {
     margin-left: -100px; /* More to the left */
   }
 
-/* .dropdown {
-    position: relative;
-    float: right;
-    top: -15px;
-    right: 200px;
-} */
-
-/* .dropdown-toggle {
-    width: 100px;
-    height: 35px;
-    color: white;
-    background-color:  rgb(134, 130, 130);
-    border: 1px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.dropdown-content {
-    display: none;
-    overflow: scroll;
-    position: absolute;
-    background-color: #f6f6f6;
-    min-width: 130px;
-    max-height: 150px;
-    border-radius: 10px;
-    border: 1px solid black;
-} */
-
-/* .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    z-index: 3;
-    cursor: pointer;
-} */
-
-/* .filter-dropdown a:hover {
-    background-color: #ddd;
-} */
 
 #weather {
     position: relative;
@@ -172,33 +124,16 @@ body {
     width: 45px;
 }
 
-/* .addBtn {
-    position: fixed;
-    float: right;
-    width: 100px;
-    height: 35px;
-    top: -15px;
-    right: 240px;
-    width: 100px;
-    height: 35px;
-    cursor: pointer;
-} */
+.img-max {
+    max-width: 38%;
+    max-height: 38%;
+    display: block;
+    padding-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-/* .logoutBtn {
-    position: relative;
-    float: right;
-    width: 100px;
-    height: 35px;
-    top: -15px;
-    right: 280px;
-    width: 100px;
-    height: 35px;
-    color: white;
-    background-color:  rgb(134, 130, 130);
-    border: 1px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-} */
+
 
 .page-title {
     position: relative;
@@ -245,17 +180,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* .post {
-    position: relative;
-    width: 350px;
-    height: 100%;
-    color: white;
-    float: center;
-    left: 500px;
-    margin-bottom: 40px;
-    border: 3px solid black;
-    border-radius: 10px;
-} */
 
 .allPosts {
     position: relative;
@@ -273,10 +197,6 @@ body {
     top: 150px;
 }
 
-#createPost {
-    position: relative;
-    top: 150px;
-}
 
 .card-body {
     background-color:#163c61;
@@ -309,28 +229,7 @@ body {
 .user-button-panel {
     background-color: #163c61;
 }
-/* 
-.user-info-btn {
-    position: relative;
-    top: 2px;
-    width: 173px;
-    height: 30px;
-    color: white;
-    background-color:  rgb(134, 130, 130);
-    border: 1px solid black;
-    border-radius: 5px; 
-} */
 
-/* .user-add-btn {
-    position: relative;
-    top: 2px;
-    width: 173px;
-    height: 30px;
-    color: white;
-    background-color:  rgb(134, 130, 130);
-    border: 1px solid black;
-    border-radius: 5px; 
-} */
 
 .user-time {
     position: relative;
@@ -356,7 +255,8 @@ body {
     border: 5px solid #163c61;
     border-radius: 5px;
     margin: auto;
-    margin-bottom: 500px;
+    margin-top: 150px;
+    margin-bottom: 0px;
 }
 
 #sportInput {

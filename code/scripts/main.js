@@ -19,11 +19,10 @@ var containerPort;
 
 // Main
 $(document).ready(function () {
-  // post = $('.post')
   firstheader = $('.website-title');
   create = $("#createPost");
   uploadBtn = $("#submitBtn");
-  allPosts = $(".container-port");
+  allPosts = $(".allPosts");
   contentHeader = $("#content-heading");
   cancelBtn = ("#cancelBtn");
   expanded = $(".expanded-images");
@@ -34,12 +33,11 @@ $(document).ready(function () {
 
   var params = {};
   window.location.search
-    .replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+    .replace(/[?&]+([^=&]+)=([^&]*)/gi, function (key, value) {
       params[key] = value;
     }
     );
 
-  console.log(params);
 
   //load all of the posts
   firebase.database().ref("users/").once("value").then(function (snapshot) {
@@ -48,7 +46,6 @@ $(document).ready(function () {
       if (url) {
         count++;
         var sport = childSnapshot.child("sport").val();
-        console.log(sport);
 
         if ('filter' in params && sport != params['filter']) {
           return;
@@ -69,10 +66,10 @@ $(document).ready(function () {
 
         var distance = "Location not available"
 
-        var lat1 = 1000000;
-        var lon1 = 1000000;
-        var lat2 = 1000000;
-        var lon2 = 1000000;
+        var lat1;
+        var lon1;
+        var lat2;
+        var lon2;
 
         firebase.database().ref("users/" + userID).child("lat").once('value', function (snapshot) {
           lat1 = snapshot.val();
@@ -98,7 +95,9 @@ $(document).ready(function () {
                 mapBtn = $("#mapBtn" + num)
                 $(infoBtn).click(function () {
                   contentHeader.hide();
-                  containerPort.css("visibility", "collapse");
+                  containerPort.removeClass("d-flex");
+                  containerPort.addClass("d-none");
+                  allPosts.hide();
                   firstheader.hide();
                   var count2 = 0;
                   while (count2 <= count) {
@@ -111,11 +110,14 @@ $(document).ready(function () {
                     count2++;
                   }
                   document.body.scrollTop = document.documentElement.scrollTop = 0;
+                  $('body').addClass('stop-scrolling');
                 });
 
                 $(backBtn).click(function () {
                   contentHeader.show();
-                  containerPort.css("visibility", "visible");
+                  containerPort.addClass("d-flex");
+                  containerPort.removeClass("d-none");
+                  allPosts.show();
                   firstheader.show();
                   $('.expanded' + num).hide();
                 });
@@ -187,10 +189,11 @@ $(document).ready(function () {
 
   $(newPostBtn).click(function () {
     create.show();
-    containerPort.css("visibility", "collapse");
+    containerPort.removeClass("d-flex");
+    containerPort.addClass("d-none");
     contentHeader.hide();
     expanded.hide();
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    allPosts.hide();
   });
 
   $(logout).click(function () {
@@ -203,7 +206,8 @@ $(document).ready(function () {
 
   $(cancelBtn).click(function () {
     create.hide();
-    containerPort.css("visibility", "visible");
+    containerPort.addClass("d-flex");
+    containerPort.removeClass("d-none");
     contentHeader.show();
   });
 
@@ -302,7 +306,6 @@ $(document).ready(function () {
         });
 
       create.hide();
-      allPosts.show();
       contentHeader.show();
     }
 
@@ -335,12 +338,11 @@ function get_distance(lat1, lon1, lat2, lon2) {
 }
 
 function createPostDiv(url, index, time, name, capacity, sport, people, distance) {
-  return "<div class='card border-dark mr-5 mb-2' style='width: 25em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>" + name + " - " + sport + "</h4><p class='card-text'>Capacity: " + people + "/" + capacity + "</p><p class='user-time'>Posted: " + time + "</p><p class='user-time'>" + distance + "</p><button class='btn btn-secondary user-info-btn' id='user-info" + index + "'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add" + index + "'> Add </button></div></div>";
+  return "<div class='card border-dark mr-5 mb-2' style='width: 23em'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>" + name + " - " + sport + "</h4><p class='card-text'>Capacity: " + people + "/" + capacity + "</p><p class='user-time'>Posted: " + time + "</p><p class='user-time'>" + distance + "</p><button class='btn btn-secondary user-info-btn' id='user-info" + index + "'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add" + index + "'> Add </button></div></div>";
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
-  return "<div class='expanded" + index + "'><p><button class='backBtn btn btn-secondary' id='backBtn" + index + "' style='background-color: #163c61;'>&#8592; Back</button></p><figure class='expanded-image' style='text-align: center;'><p class='aligncenter'><img class='img-fluid' src='" + url + "' alt='Responsive image'><figcaption>Location: " + location + " <button class='backBtn btn btn-secondary' id='mapBtn" + index + "' style='background-color: #163c61; margin-left: 3px;'>Directions <img src='images/gmapsicon.png' alt='google maps icon' width='25' height='25'></button></figcaption><figcaption style='text-align: center;'>Activity: " + sport + "</figcaption><figcaption style='text-align: center;'>Posted by: " + name + "</figcaption></figure></p></div></div>"
-  // <i class='material-icons'>directions</i>
+  return "<div class='expanded" + index + "'><button class='btn btn-secondary' id='backBtn" + index + "' style='background-color: #163c61; margin-left: 20px;'>&#8592; Back</button><figure class='expanded-image' style='text-align: center;'><div class='img-max'><img class='rounded mx-auto d-block img-fluid' src='" + url + " alt='Responsive image'></div><figcaption>Location: " + location + " <button class='backBtn btn btn-secondary' id='mapBtn" + index + "' style='background-color: #163c61; margin-left: 3px;'>Directions <img src='images/gmapsicon.png' alt='google maps icon' width='25' height='25'></button></figcaption><figcaption style='text-align: center;'>Activity: " + sport + "</figcaption><figcaption style='text-align: center;'>Posted by: " + name + "</figcaption></figure></p></div></div>"
 }
 
 
