@@ -33,7 +33,7 @@ $(document).ready(function () {
 
   var params = {};
   window.location.search
-    .replace(/[?&]+([^=&]+)=([^&]*)/gi, function (key, value) {
+    .replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
       params[key] = value;
     }
     );
