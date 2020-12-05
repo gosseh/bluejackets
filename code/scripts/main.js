@@ -8,22 +8,27 @@ var upload;
 var uploadBtn;
 let count = -1;
 var allPosts;
-var contentHeader;
 var cancelBtn;
 var addBtn;
 var mapBtn;
 var logout;
 var containerPort;
+var deleteBtn;
 
 ////  Functional Code  ////
 
 // Main
 $(document).ready(function () {
+  if(document.URL.indexOf("#")==-1){
+    url = document.URL+"#loaded";
+    location = "#loaded";
+    location.reload();
+  }
+
   firstheader = $('.website-title');
   create = $("#createPost");
   uploadBtn = $("#submitBtn");
   allPosts = $(".allPosts");
-  contentHeader = $("#content-heading");
   cancelBtn = ("#cancelBtn");
   expanded = $(".expanded-images");
   containerPort = $(".container-port");
@@ -79,13 +84,16 @@ $(document).ready(function () {
               lon1 = snapshot.val();
               firebase.database().ref("users/" + uid).child("lng").once('value', function (snapshot) {
                 lon2 = snapshot.val();
-                console.log(parseInt(lon1));
-                console.log(parseInt(lon2));
-                console.log(parseInt(lat1));
-                console.log(parseInt(lat2));
                 distance = get_distance(lat1, lon1, lat2, lon2).toFixed(2) + " miles away";
                 post = createPostDiv(url, num, time, uniqname, capacity, sport, people, distance);
                 containerPort.append(post);
+                deleteBtn = $('#user-delete' + num);
+                if(uid === userID){
+                  deleteBtn.show();
+                }
+                else{
+                  deleteBtn.hide();
+                }
                 infoBtn = $('#user-info' + num);
                 addBtn = $('#user-add' + num);
                 var expandedPost = createExpandedDiv(num, locationName, sport, name, url);
@@ -94,7 +102,6 @@ $(document).ready(function () {
                 backBtn = $("#backBtn" + num);
                 mapBtn = $("#mapBtn" + num)
                 $(infoBtn).click(function () {
-                  contentHeader.hide();
                   containerPort.removeClass("d-flex");
                   containerPort.addClass("d-none");
                   allPosts.hide();
@@ -111,8 +118,12 @@ $(document).ready(function () {
                   }
                 });
 
+                $(deleteBtn).click(function () {
+                  firebase.database().ref('users/' + userID).update({ url: "", });
+                  location.reload();
+                });
+
                 $(backBtn).click(function () {
-                  contentHeader.show();
                   containerPort.addClass("d-flex");
                   containerPort.removeClass("d-none");
                   allPosts.show();
@@ -125,7 +136,6 @@ $(document).ready(function () {
                 $(addBtn).click(function () {
                   var ref = firebase.database().ref("users/" + userID);
                   ref.child("people").once('value', function (snapshot) {
-                    console.log(parseInt(snapshot.val()) + 1)
                     var numPeople = parseInt(snapshot.val()) + 1;
                     if (numPeople > capacity) {
                       alert("This location has reached maximum capacity.");
@@ -189,7 +199,6 @@ $(document).ready(function () {
     create.show();
     containerPort.removeClass("d-flex");
     containerPort.addClass("d-none");
-    contentHeader.hide();
     expanded.hide();
     allPosts.hide();
   });
@@ -198,7 +207,7 @@ $(document).ready(function () {
     firebase.auth().signOut().then(function () {
       window.location.href = './login.html';
     }).catch(function (error) {
-      console.log(error)
+      console.log(error);
     });
   });
 
@@ -206,7 +215,6 @@ $(document).ready(function () {
     create.hide();
     containerPort.addClass("d-flex");
     containerPort.removeClass("d-none");
-    contentHeader.show();
   });
 
   $(uploadBtn).click(function () {
@@ -227,7 +235,6 @@ $(document).ready(function () {
       var time = new Date();
       time = time.toString();
       time = time.substring(4, 24);
-      console.log(time);
       var storageRef = firebase.storage().ref(time.toString());
       var url;
 
@@ -284,7 +291,6 @@ $(document).ready(function () {
             url = downloadURL;
             //create div for new post
             let uid = firebase.auth().currentUser.uid;
-            console.log(time);
             firebase.database().ref('users/' + uid).update({
               url: url,
               id: uid,
@@ -299,12 +305,17 @@ $(document).ready(function () {
                 console.log(error);
               }
             });
-            location.reload();
+            if(document.URL.indexOf("#")!=-1){
+              // Set the URL to whatever it was plus "#loaded".
+              url = document.URL.substring(0, document.URL.length - 7);
+              location = "";
+              //Reload the page using reload() method
+              location.reload();
+            }
           });
         });
 
       create.hide();
-      contentHeader.show();
     }
 
 
@@ -336,7 +347,7 @@ function get_distance(lat1, lon1, lat2, lon2) {
 }
 
 function createPostDiv(url, index, time, name, capacity, sport, people, distance) {
-  return "<div class='card border-dark mx-auto mr-5 mb-2 mt-5' style='width: 23em;'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>" + name + " - " + sport + "</h4><p class='card-text'>Capacity: " + people + "/" + capacity + "</p><p class='user-time'>Posted: " + time + "</p><p class='user-time'>" + distance + "</p><button class='btn btn-secondary user-info-btn' id='user-info" + index + "'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add" + index + "'> Add </button></div></div>";
+  return "<div class='card border-dark mx-auto mr-5 mb-2 mt-5' style='width: 23em;'id=post" + index + "'><img class='card-img-top' src='" + url + " alt='user-image'><div class='card-body text-center'><h4 class='card-title'>" + name + " - " + sport + "</h4><p class='card-text'>Capacity: " + people + "/" + capacity + "</p><p class='user-time'>Posted: " + time + "</p><p class='user-time'>" + distance + "</p><button class='btn btn-secondary user-info-btn' id='user-info" + index + "'> More Info </button> <button class='btn btn-secondary user-add-btn' id='user-add" + index + "'> Add </button> <button class='btn btn-secondary user-delete-btn' id='user-delete" + index + "'> Delete Post </button></div></div>";
 }
 
 function createExpandedDiv(index, location, sport, name, url) {
