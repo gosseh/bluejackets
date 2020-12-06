@@ -19,8 +19,8 @@ var deleteBtn;
 
 // Main
 $(document).ready(function () {
-  if(document.URL.indexOf("#")==-1){
-    url = document.URL+"#loaded";
+  if (document.URL.indexOf("#") == -1) {
+    url = document.URL + "#loaded";
     location = "#loaded";
     location.reload();
   }
@@ -88,10 +88,10 @@ $(document).ready(function () {
                 post = createPostDiv(url, num, time, uniqname, capacity, sport, people, distance);
                 containerPort.append(post);
                 deleteBtn = $('#user-delete' + num);
-                if(uid === userID){
+                if (uid === userID) {
                   deleteBtn.show();
                 }
-                else{
+                else {
                   deleteBtn.hide();
                 }
                 infoBtn = $('#user-info' + num);
@@ -148,32 +148,14 @@ $(document).ready(function () {
                   });
                 });
 
+
                 $(mapBtn).click(function () {
-                  var originLat = 1000000;
-                  var originLon = 1000000;
-                  var destLat = 1000000;
-                  var destLon = 1000000;
-                  firebase.database().ref("users/").once("value").then(function (snapshot) {
-                    snapshot.forEach(function (childSnapshot) {
-                      let checkID = childSnapshot.child("id").val();
-                      if (checkID === userID) {
-                        destLat = parseFloat(childSnapshot.child("lat").val());
-                        destLon = parseFloat(childSnapshot.child("lng").val());
-                      }
-                      if (checkID === uid) {
-                        originLat = parseFloat(childSnapshot.child("lat").val());
-                        originLon = parseFloat(childSnapshot.child("lng").val());
-                      }
-                      if (originLat !== 1000000 && originLon !== 1000000 && destLat !== 1000000 && destLon !== 1000000) {
-                        let url = "https://www.google.com/maps/dir/?api=1";
-                        let origin = "&origin=" + originLat + "," + originLon;
-                        let destination = "&destination=" + destLat + "," + destLon;
-                        let travelmode = "&travelmode=transit";
-                        let newUrl = new URL(url + origin + destination + travelmode);
-                        window.open(newUrl, '_blank');
-                      }
-                    });
-                  });
+                  let url = "https://www.google.com/maps/dir/?api=1";
+                  let origin = "&origin=" + lat2 + "," + lon2;
+                  let destination = "&destination=" + lat1 + "," + lon1;
+                  let travelmode = "&travelmode=transit";
+                  let newUrl = new URL(url + origin + destination + travelmode);
+                  window.open(newUrl, '_blank');
                 });
 
               });
@@ -305,7 +287,7 @@ $(document).ready(function () {
                 console.log(error);
               }
             });
-            if(document.URL.indexOf("#")!=-1){
+            if (document.URL.indexOf("#") != -1) {
               // Set the URL to whatever it was plus "#loaded".
               url = document.URL.substring(0, document.URL.length - 7);
               location = "";
